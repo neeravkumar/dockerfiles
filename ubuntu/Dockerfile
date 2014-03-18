@@ -1,5 +1,4 @@
 FROM ubuntu:12.04
 MAINTAINER me@nero.im
-RUN apt-get update && apt-get install -y curl
-ONBUILD RUN export COUNTRY=$(curl ipinfo.io/country) && echo deb http://$COUNTRY.archive.ubuntu.com/ubuntu/ precise main universe multiverse > /etc/apt/sources.list && echo deb http://$COUNTRY.archive.ubuntu.com/ubuntu/ precise-security main universe multiverse >> /etc/apt/sources.list
+ONBUILD RUN export COUNTRY=$(python -c "import urllib; print urllib.urlopen('http://ipinfo.io/country').read().strip()") && sed -i "s/us/$COUNTRY/g" >> /etc/apt/sources.list
 ONBUILD RUN apt-get update && apt-get upgrade -y

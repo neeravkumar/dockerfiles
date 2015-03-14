@@ -3,5 +3,5 @@ RUN mkdir -p /etc/apk && echo "http://alpine.gliderlabs.com/alpine/edge/main" > 
     apk update && apk-install redis &&\
     sed -i 's/daemonize yes/daemonize no/g' /etc/redis.conf &&\
     sed -i 's/# bind 0.0.0.0/bind 0.0.0.0/g' /etc/redis.conf
-ENTRYPOINT ["/bin/sh","/usr/bin/redis-server","/etc/redis.conf"]
+ENTRYPOINT ["/usr/bin/redis-server","/etc/redis.conf"]
 EXPOSE 6379

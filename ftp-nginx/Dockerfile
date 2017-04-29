@@ -1,5 +1,5 @@
-FROM alpine:edge
-RUN apk add --update openssh nginx openssl &&\
+FROM neerav/alpine:latest
+RUN apk add --update openssh nginx openssl pwgen &&\
     ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa &&\
     sed -i "s/UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config &&\
     sed -i "s/UsePAM.*/UsePAM yes/g" /etc/ssh/sshd_config &&\
@@ -10,4 +10,3 @@ RUN apk add --update openssh nginx openssl &&\
     rm -rf /var/cache/apk/* &&\
     touch /usr/share/nginx/log/access.log /usr/share/nginx/log/error.log
 COPY nginx.conf /etc/nginx/nginx.conf
-CMD /usr/sbin/sshd && nginx -g "daemon off;"

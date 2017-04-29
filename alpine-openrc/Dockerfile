@@ -16,5 +16,7 @@ RUN mkdir -p /etc/apk && echo "http://alpine.gliderlabs.com/alpine/edge/main" > 
 # can't mount tmpfs since not privileged
     sed -i 's/mount -t tmpfs/# mount -t tmpfs/g' /lib/rc/sh/init.sh &&\
 # can't do cgroups
-    sed -i 's/cgroup_add_service /# cgroup_add_service /g' /lib/rc/sh/openrc-run.sh
+    sed -i 's/cgroup_add_service /# cgroup_add_service /g' /lib/rc/sh/openrc-run.sh &&\
+# clean apk cache
+    rm -rf /var/cache/apk/*
 CMD ["/sbin/init"]

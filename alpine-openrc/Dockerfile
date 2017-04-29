@@ -2,7 +2,7 @@ FROM alpine:edge
 # use the CDN mirror from gilderlabs since its much faster
 RUN mkdir -p /etc/apk && echo "http://alpine.gliderlabs.com/alpine/edge/main" > /etc/apk/repositories &&\
 # Install openrc
-    apk update && apk upgrade && apk add openrc &&\
+    apk update && apk add openrc &&\
 # Tell openrc its running inside a container, till now that has meant LXC
     sed -i 's/#rc_sys=""/rc_sys="lxc"/g' /etc/rc.conf &&\
 # Tell openrc loopback and net are already there, since docker handles the networking
